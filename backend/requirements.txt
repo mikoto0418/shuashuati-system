@@ -1,0 +1,27 @@
+# Flask核心框架
+Flask==2.3.3
+Flask-CORS==4.0.0
+Werkzeug==2.3.7
+
+# 数据库相关
+Flask-SQLAlchemy==3.0.5
+Flask-Migrate==4.0.5
+
+# 用户认证
+Flask-Login==0.6.3
+bcrypt==4.0.1
+PyJWT==2.8.0
+cryptography==41.0.7
+
+# 文件处理
+python-docx==0.8.11
+PyPDF2==3.0.1
+Pillow==10.0.0
+
+# 工具库
+requests==2.31.0
+python-dotenv==1.0.0
+
+# 开发工具
+pytest==7.4.2
+pytest-flask==1.2.0
