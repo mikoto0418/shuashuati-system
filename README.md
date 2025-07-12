@@ -1,300 +1,193 @@
-# 刷刷题系统 (ShuaShuaTi System)
+# 刷刷题 - 智能刷题系统
 
-智能题库管理与练习系统 - 支持文档智能提取、题目管理、练习刷题等功能
+一个基于Flask和AI技术的智能刷题系统，支持从文档中自动提取题目并生成练习。
 
-## 📋 项目概述
+## ✨ 主要功能
 
-刷刷题系统是一个基于前后端分离架构的智能题库管理与练习平台。系统利用大模型技术，实现对各类题库文档的自动化处理、高效管理和灵活的练习与刷题功能。通过自动化提取、智能分类和多样化的学习模式，帮助用户更好地巩固知识、找出薄弱环节。
+### 🎯 核心功能
+- **用户管理**: 注册、登录、个人资料管理
+- **题库管理**: 题目分类、增删改查、批量导入
+- **智能练习**: 随机练习、分类练习、错题重练
+- **收藏系统**: 收藏重要题目，便于复习
 
-## ✨ 核心功能
+### 🤖 AI智能提取
+- **多格式支持**: Word文档(.docx)、PDF文件(.pdf)、图片(.png/.jpg/.jpeg)、纯文本(.txt)
+- **智能解析**: 自动识别题目类型（单选、多选、判断、填空、问答）
+- **质量优化**: AI自动优化题目表述和选项
+- **批量处理**: 一次上传，批量提取多个题目
+- **历史管理**: 查看上传历史和处理结果
+- **实时监控**: 实时显示AI处理进度和思考过程
 
-### 🤖 智能文档处理
-- 支持 Word、PDF、图片格式的题库文档上传
-- 基于大模型的智能内容提取和题型识别
-- 自动结构化处理，支持单选、多选、判断、填空题型
+## 🏗️ 技术栈
 
-### 📚 题库管理
-- 灵活的分类管理系统
-- 题目的增删改查操作
-- 批量操作和高级筛选
-- 手动添加题目功能
-
-### 🎯 练习模式
-- **练习模式**：计时练习、错题记录、成绩统计
-- **刷题模式**：快速浏览、答案展示、知识点复习
-- 收藏夹和错题本功能
-- 多种题目排序方式（顺序/乱序）
-
-### 👤 用户系统
-- 用户注册、登录、权限管理
-- 个人学习数据统计
-- 安全的身份认证机制
-
-## 🛠️ 技术栈
-
-### 后端技术
-- **语言**: Python 3.9+
-- **框架**: Flask
-- **数据库**: MySQL + Redis
+### 后端
+- **框架**: Flask 2.3.3
+- **数据库**: SQLite (开发) / MySQL (生产)
 - **ORM**: SQLAlchemy
-- **认证**: JWT Token + bcrypt
-- **文件处理**: python-docx, PyPDF2, Pillow
-- **任务队列**: Celery + Redis
+- **认证**: Flask-Login
+- **API**: RESTful API
+- **AI服务**: 硅基流动 DeepSeek API
 
-### 前端技术
+### 前端
 - **框架**: Vue 3 + TypeScript
+- **UI库**: Element Plus
 - **构建工具**: Vite
-- **状态管理**: Pinia
-- **UI组件**: Element Plus
-- **HTTP客户端**: Axios
-- **样式**: SCSS + CSS Modules
+- **样式**: 响应式设计
 
-## 🏗️ 项目结构
+## 📁 项目结构
 
 ```
-shuashuati-system/
+刷刷题-shuashuati/
 ├── backend/                 # 后端代码
-│   ├── app/
-│   │   ├── models/         # 数据模型
-│   │   ├── services/       # 业务逻辑
-│   │   ├── controllers/    # 控制器
-│   │   └── utils/          # 工具函数
-│   ├── migrations/         # 数据库迁移
-│   ├── tests/              # 测试代码
-│   └── requirements.txt    # Python依赖
-├── frontend/               # 前端代码
+│   ├── app.py              # Flask应用主文件
+│   ├── config.py           # 配置文件
+│   ├── models.py           # 数据库模型
+│   ├── services/           # 业务逻辑服务
+│   │   ├── ai_service.py   # AI题目提取服务
+│   │   ├── document_parser.py # 文档解析服务
+│   │   └── file_processor.py  # 文件处理服务
+│   ├── routes/             # API路由
+│   ├── requirements.txt    # Python依赖
+│   └── uploads/            # 文件上传目录
+├── frontend-vue/           # Vue前端代码
 │   ├── src/
-│   │   ├── components/     # 通用组件
 │   │   ├── views/          # 页面组件
+│   │   ├── components/     # 通用组件
 │   │   ├── stores/         # 状态管理
-│   │   ├── services/       # API服务
-│   │   └── types/          # TypeScript类型
-│   ├── public/             # 静态资源
-│   └── package.json        # 前端依赖
-├── docs/                   # 项目文档
-└── README.md              # 项目说明
+│   │   └── utils/          # 工具函数
+│   ├── package.json        # 前端依赖
+│   └── vite.config.ts      # Vite配置
+├── start_backend.py        # 后端启动脚本
+├── 需求分析文档.md          # 项目需求文档
+├── 项目进度分析.md          # 项目进度规划
+└── README.md               # 项目说明文档
 ```
 
 ## 🚀 快速开始
 
 ### 环境要求
-- Python 3.9+
+
+- Python 3.7+
 - Node.js 16+
-- MySQL 8.0+
-- Redis 6.0+
+- 现代浏览器（Chrome、Firefox、Safari、Edge）
 
-### 后端启动
+### AI服务配置
 
-```bash
-# 进入后端目录
-cd backend
+本系统使用硅基流动的DeepSeek模型进行题目提取，需要配置API密钥：
 
-# 创建虚拟环境
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 安装依赖
-pip install -r requirements.txt
-
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件，配置数据库连接等信息
-
-# 初始化数据库
-flask db upgrade
-
-# 启动开发服务器
-flask run
+1. 访问 [硅基流动开放平台](https://siliconflow.cn/)
+2. 注册账号并获取API密钥
+3. 在 `backend/.env` 文件中配置:
+```
+SILICONFLOW_API_KEY=your-api-key-here
 ```
 
-### 前端启动
+### 安装步骤
 
-```bash
-# 进入前端目录
-cd frontend
-
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-```
-
-## 📖 API 文档
-
-启动后端服务后，访问 `http://localhost:5000/docs` 查看完整的 API 文档。
-
-### 主要接口
-
-- **用户认证**: `/api/auth/*`
-- **题目管理**: `/api/questions/*`
-- **分类管理**: `/api/categories/*`
-- **文件上传**: `/api/files/*`
-- **练习功能**: `/api/practice/*`
-
-## 🗄️ 数据库设计
-
-### 核心表结构
-
-- **users**: 用户信息
-- **categories**: 题目分类
-- **questions**: 题目内容
-- **practice_records**: 练习记录
-- **wrong_answers**: 错题本
-- **favorites**: 收藏夹
-- **upload_records**: 文件上传记录
-
-详细的数据库设计请参考 [需求分析文档.md](./需求分析文档.md)。
-
-## 🔧 配置说明
-
-### 环境变量配置
-
-```env
-# 数据库配置
-DATABASE_URL=mysql://username:password@localhost/shuashuati
-REDIS_URL=redis://localhost:6379/0
-
-# JWT配置
-JWT_SECRET_KEY=your-secret-key
-JWT_ACCESS_TOKEN_EXPIRES=3600
-
-# 大模型API配置
-AI_MODEL_API_KEY=your-ai-api-key
-AI_MODEL_BASE_URL=https://api.example.com
-
-# 文件存储配置
-UPLOAD_FOLDER=uploads
-MAX_CONTENT_LENGTH=16777216  # 16MB
-```
-
-## 🧪 测试
-
-### 后端测试
-
-```bash
-cd backend
-pytest tests/
-```
-
-### 前端测试
-
-```bash
-cd frontend
-npm run test
-```
-
-## 📦 部署
-
-### 生产环境部署
-
-1. **后端部署**
+1. **克隆项目**
    ```bash
-   # 使用 Gunicorn 启动
-   gunicorn -w 4 -b 0.0.0.0:5000 app:app
+   git clone https://github.com/mikoto0418/shuashuati-system.git
+   cd shuashuati-system
    ```
 
-2. **前端构建**
+2. **后端设置**
    ```bash
-   npm run build
-   # 将 dist 目录部署到 Nginx
+   cd backend
+   python -m venv venv
+   
+   # Windows
+   venv\Scripts\activate
+   
+   # Linux/Mac
+   source venv/bin/activate
+   
+   pip install -r requirements.txt
    ```
 
-3. **Nginx 配置**
-   ```nginx
-   server {
-       listen 80;
-       server_name your-domain.com;
-       
-       location / {
-           root /path/to/frontend/dist;
-           try_files $uri $uri/ /index.html;
-       }
-       
-       location /api {
-           proxy_pass http://localhost:5000;
-           proxy_set_header Host $host;
-           proxy_set_header X-Real-IP $remote_addr;
-       }
-   }
+3. **前端设置**
+   ```bash
+   cd frontend-vue
+   npm install
    ```
 
-## 🤝 贡献指南
+4. **启动服务**
+   ```bash
+   # 启动后端（在backend目录）
+   python app.py
+   
+   # 启动前端（在frontend-vue目录）
+   npm run dev
+   ```
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+5. **访问应用**
+   - 前端：http://localhost:3000
+   - 后端API：http://localhost:5000
 
-### 代码规范
+## 📋 最新更新
 
-- **Python**: 遵循 PEP 8，使用 Black 格式化
-- **Vue/TypeScript**: 使用 ESLint + Prettier
-- **Git**: 使用 Conventional Commits 规范
+### ✅ 2025年1月 - 实时处理监控优化
 
-## 📄 许可证
+- [x] **修复文档处理卡顿问题**
+  - 优化前端进度监控机制
+  - 实现处理日志自动刷新
+  - 用户可实时查看AI思考过程
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+- [x] **增强用户体验**
+  - 自动刷新处理日志（每1.5秒）
+  - 实时显示AI分析步骤
+  - 透明的处理进度展示
+
+### 🚧 开发中功能
+
+- [ ] MySQL数据库支持
+- [ ] 批量题目导入优化
+- [ ] 题目质量评估系统
+- [ ] 用户练习数据分析
+
+## 🔧 开发指南
+
+### 核心特性
+
+1. **智能文档解析**：支持多种格式文档的智能解析
+2. **AI题目提取**：使用先进AI模型自动提取和优化题目
+3. **实时处理监控**：用户可实时查看文档处理进度和AI思考过程
+4. **完整的日志系统**：详细记录每个处理步骤，便于调试和优化
+
+### 技术亮点
+
+- **前后端分离**：Vue3 + Flask架构，便于维护和扩展
+- **实时通信**：前端轮询机制实现实时状态更新
+- **模块化设计**：服务层清晰分离，便于功能扩展
+- **错误处理**：完善的异常处理和用户提示机制
+
+## 🐛 故障排除
+
+### 常见问题
+
+1. **后端启动失败**
+   ```bash
+   # 检查Python版本
+   python --version
+   
+   # 重新安装依赖
+   pip install -r requirements.txt
+   ```
+
+2. **前端无法连接后端**
+   - 确认后端服务运行在 http://localhost:5000
+   - 检查前端配置文件中的API地址
+
+3. **AI服务调用失败**
+   - 检查 `.env` 文件中的API密钥配置
+   - 确认网络连接正常
 
 ## 📞 联系方式
 
-- 项目地址: [https://github.com/mikoto0418/shuashuati-system](https://github.com/mikoto0418/shuashuati-system)
-- 问题反馈: [Issues](https://github.com/mikoto0418/shuashuati-system/issues)
+如有问题或建议，请通过以下方式联系：
 
-## 🎯 开发路线图
+- GitHub Issues: [提交问题](https://github.com/mikoto0418/shuashuati-system/issues)
+- 项目维护者: mikoto0418
 
-### 💡 分阶段开发策略
+## 📄 许可证
 
-本项目采用**"小步快跑，频繁验证"**的开发模式，每个阶段都有明确的验收标准，避免长时间开发后在某个环节卡住。
-
-### 📅 开发计划 (8周)
-
-#### 第1周：项目启动 ✅
-- [x] 需求分析和技术方案设计
-- [x] 项目初始化和基础架构规划
-- [x] 开发环境准备
-
-#### 第2周：基础架构搭建 ⏳
-- [ ] **阶段2.1**: 后端基础框架 (Flask + SQLAlchemy)
-- [ ] **阶段2.2**: 前端基础框架 (Vue 3 + Element Plus)
-- [ ] **阶段2.3**: 数据库初始化和基础配置
-
-#### 第3-4周：核心功能开发 ⏳
-- [ ] **阶段3.1**: 简化用户系统 (Session认证)
-- [ ] **阶段3.2**: 分类管理功能
-- [ ] **阶段3.3**: 基础题目管理
-- [ ] **阶段3.4**: 基础练习功能
-
-#### 第5-6周：智能提取与增强功能 ⏳
-- [ ] **阶段5.1**: 文件上传基础
-- [ ] **阶段5.2**: 简单文本提取
-- [ ] **阶段5.3**: AI智能解析
-- [ ] **阶段5.4**: 练习功能增强
-
-#### 第7周：优化与完善 ⏳
-- [ ] **阶段7.1**: 功能完善和用户体验优化
-- [ ] **阶段7.2**: 性能优化和安全加固
-
-#### 第8周：部署上线 ⏳
-- [ ] **阶段8.1**: 本地部署测试
-- [ ] **阶段8.2**: 线上部署
-- [ ] **阶段8.3**: 文档完善和项目收尾
-
-### 🔍 验收标准
-
-每个阶段都有明确的验收标准：
-- 功能可演示
-- 用户可操作
-- 问题可定位
-- 与已有功能兼容
-
-### ⚠️ 风险控制
-
-- **技术风险**: 每个新技术先做小demo验证
-- **进度风险**: 每周评估进度，必要时调整计划
-- **质量风险**: 每个阶段都要有基础测试
-
-## 🙏 致谢
-
-感谢所有为这个项目做出贡献的开发者和用户！
+本项目采用 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
