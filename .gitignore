@@ -1,0 +1,55 @@
+# Python cache & env
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.vemv/
+
+# Tooling caches
+.serena/
+.claude/
+.codex/
+
+# Editor & IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# AI assistant artifacts
+CLAUDE.md
+CODEX.md
+agent_creator_prompt.md
+
+# Databases & local state
+*.db
+*.sqlite3
+*.db-journal
+backend/static/uploads/
+.env
+.env.*
+!.env.example
+backend/.env
+frontend/.env
+frontend/.env.*
+
+# Node.js artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Build outputs
+dist/
+*.log
+
+# OS noise
+Thumbs.db
+.DS_Store
